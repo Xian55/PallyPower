@@ -1149,7 +1149,7 @@
     <Frame name="PallyPower_OptionsFrame" hidden="true" toplevel="true" frameStrata="LOW" enableMouse="true"
            movable="true" parent="UIParent">
         <Size>
-            <AbsDimension x="400" y="370"/>
+            <AbsDimension x="400" y="395"/>
         </Size>
         <Anchors>
             <Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
@@ -1268,6 +1268,19 @@
                         <Anchor point="TOPLEFT">
                             <Offset>
                                 <AbsDimension x="7" y="-155"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parentOption8" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_LOCKFRAMES"
+                            justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="380" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="7" y="-180"/>
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -1472,6 +1485,34 @@
                 <Scripts>
                     <OnShow>if (PP_PerUser.quietmode) then this:SetChecked(true) else this:SetChecked(false) end</OnShow>
                     <OnClick>PP_PerUser.quietmode = this:GetChecked()</OnClick>
+                </Scripts>
+            </CheckButton>
+            <CheckButton name="$parentLockFrames" inherits="OptionsCheckButtonTemplate">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-5" y="-180"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnShow>if (PP_PerUser.locked) then this:SetChecked(true) else this:SetChecked(false) end</OnShow>
+                    <OnClick>
+                        PP_PerUser.locked = this:GetChecked() == 1;
+                        local v = PP_PerUser.locked and 1 or 0;
+                        PallyPowerFrame.isLocked = v;
+                        PallyPowerBuffBar.isLocked = v;
+                        if PP_PerUser.locked then
+                            PallyPowerFrameResizeButton:Hide();
+                            PallyPowerBuffBarResizeButton:Hide();
+                        else
+                            PallyPowerFrameResizeButton:Show();
+                            PallyPowerBuffBarResizeButton:Show();
+                        end
+                    </OnClick>
                 </Scripts>
             </CheckButton>
         </Frames>

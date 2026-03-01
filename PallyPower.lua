@@ -37,6 +37,7 @@ PP_PerUser = {
     smartbuffs = 1,
     chatfeedback = 1,
     opacity = 0.5,        -- frame backdrop alpha (0.0–1.0)
+    locked = false,       -- lock frame positions (/pp lock)
 }
 
 -- === Event-driven state ===
@@ -407,11 +408,18 @@ function PallyPower_OnEvent(event)
         end
     elseif event == "PLAYER_LOGIN" then
         -- Merge defaults for keys added in newer versions (saved vars are now loaded)
-        local defaults = { opacity = 0.5 }
+        local defaults = { opacity = 0.5, locked = false }
         for k, v in pairs(defaults) do
             if PP_PerUser[k] == nil then
                 PP_PerUser[k] = v
             end
+        end
+        local lockVal = PP_PerUser.locked and 1 or 0
+        PallyPowerFrame.isLocked = lockVal
+        PallyPowerBuffBar.isLocked = lockVal
+        if PP_PerUser.locked then
+            PallyPowerFrameResizeButton:Hide()
+            PallyPowerBuffBarResizeButton:Hide()
         end
         PallyPower_ApplyOpacity()
         PallyPower_UpdateUI()
@@ -471,6 +479,21 @@ function PallyPower_SlashCommandHandler(msg)
     if msg == "report" then
         PallyPower_Report()
         return true
+    end
+    if msg == "lock" then
+        PP_PerUser.locked = not PP_PerUser.locked
+        local v = PP_PerUser.locked and 1 or 0
+        PallyPowerFrame.isLocked = v
+        PallyPowerBuffBar.isLocked = v
+        if PP_PerUser.locked then
+            PallyPowerFrameResizeButton:Hide()
+            PallyPowerBuffBarResizeButton:Hide()
+        else
+            PallyPowerFrameResizeButton:Show()
+            PallyPowerBuffBarResizeButton:Show()
+        end
+        DEFAULT_CHAT_FRAME:AddMessage("PallyPower: frames " .. (PP_PerUser.locked and "locked" or "unlocked"))
+        return
     end
     if PallyPowerFrame:IsVisible() then PallyPowerFrame:Hide() else PallyPowerFrame:Show() end
     PallyPower_UpdateUI()

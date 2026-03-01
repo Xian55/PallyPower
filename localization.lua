@@ -81,6 +81,7 @@ PALLYPOWER_OPTIONS_FIVEMIN = _ttRealms[GetRealmName()]
     or  "Enable 5 Min Blessing Only - NO GREATER BLESSINGS";
 PALLYPOWER_OPTIONS_OPACITY = "Frame Opacity:";
 PALLYPOWER_OPTIONS_QUIETMODE = "Quiet mode (suppress system messages)";
+PALLYPOWER_OPTIONS_LOCKFRAMES = "Lock frame positions";
 if (GetLocale() == "deDE") then
 	-- by Nextorus @ EU-Alexstrasza (nexter@walsweer.de)
     PallyPower_BlessingID[0] = "Weisheit";
@@ -142,6 +143,7 @@ if (GetLocale() == "deDE") then
     PALLYPOWER_REFRESH = "Neu abfragen";
     PALLYPOWER_OPTIONS_OPACITY = "Rahmen-Deckkraft:";
     PALLYPOWER_OPTIONS_QUIETMODE = "Stiller Modus (Systemnachrichten unterdr\195\188cken)";
+    PALLYPOWER_OPTIONS_LOCKFRAMES = "Rahmenpositionen sperren";
 elseif (GetLocale() == "frFR") then
 
 -- by Gagou @ EU-Drek'Thar (thomas@ranchon.org)
@@ -204,5 +206,6 @@ elseif (GetLocale() == "frFR") then
     PALLYPOWER_REFRESH = "Rafraichir";
     PALLYPOWER_OPTIONS_OPACITY = "Opacit\195\169 du cadre :";
     PALLYPOWER_OPTIONS_QUIETMODE = "Mode silencieux (masquer les messages syst\195\168me)";
+    PALLYPOWER_OPTIONS_LOCKFRAMES = "Verrouiller la position des cadres";
 
 end
