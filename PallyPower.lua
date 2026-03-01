@@ -436,6 +436,10 @@ function PallyPower_OnEvent(event)
         for _, u in ipairs(RosterUnits) do ScanOneUnit(u) end
         uiDirty = true
         pendingRosterRebuild = 2  -- deferred rebuild to catch late-loading pets
+        if IsPally == 1 and (GetNumRaidMembers() > 0 or GetNumPartyMembers() > 0) then
+            PallyPower_SendSelf()
+            PallyPower_RequestSend()
+        end
 
     elseif event == "UNIT_PET" then
         RebuildRoster()
