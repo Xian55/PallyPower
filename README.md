@@ -1,6 +1,17 @@
 # PallyPower for TurtleWoW
 - Download the zip file and rename to PallyPower
 
+## Slash Commands
+
+| Command | Description |
+|---|---|
+| `/pp` or `/pallypower` | Toggle the main assignment UI frame |
+| `/pp report` | Print blessing assignments to raid/party chat |
+| `/pp lock` | Toggle frame position locking (persists across reloads) |
+| `/pp debug` | Toggle debug output to chat |
+
+---
+
 ## v1.8.0
 
 **Performance:**
@@ -23,17 +34,6 @@
 - Frame opacity setting
 - Chat feedback toggle for cast notifications
 - `/pp lock` to toggle frame position locking (persists across reloads)
-
----
-
-## Slash Commands
-
-| Command | Description |
-|---|---|
-| `/pp` or `/pallypower` | Toggle the main assignment UI frame |
-| `/pp report` | Print blessing assignments to raid/party chat |
-| `/pp lock` | Toggle frame position locking (persists across reloads) |
-| `/pp debug` | Toggle debug output to chat |
 
 ---
 
