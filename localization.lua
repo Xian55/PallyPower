@@ -1,4 +1,4 @@
-PallyPower_Version = "1.072b"
+PallyPower_Version = GetAddOnMetadata("PallyPower", "Version")
   SLASH_PALLYPOWER1 = "/pp"
   SLASH_PALLYPOWER2 = "/pallypower"
 
@@ -13,12 +13,11 @@ PallyPower_BlessingID[5] = "Sanctuary";
 
 PallyPower_BlessingTalentSearch = "Improved Blessings";
 
-if (FiveMinBlessing == false) 
+if (FiveMinBlessing == false)
   then
     PallyPower_BlessingSpellSearch = "Greater Blessing of (.*)";
   else
     PallyPower_BlessingSpellSearch = "Blessing of (.*)";
-  
 end
 --PallyPower_BlessingSpellSearch = "Blessing of (.*)";
 --PallyPower_FiveManBlessingSpellSearch = "Blessing of (.*)";
@@ -40,11 +39,12 @@ PallyPower_BuffBarTitle = "Pally Buffs (%d)"
 
 --- By Lines... Keep People the same, feel free to add yourself in the _Credits3 line if your localizing
 --- And feel free to add a friend or two to special thanks
-PallyPower_Credits1 = "Relar Pally Power - Version: "..PallyPower_Version
+PallyPower_Credits1 = "Pally Power - Version: "..PallyPower_Version
 PallyPower_Credits2 = "Originaly by Sneakyfoot of Resurrection of Nathrezim"
 PallyPower_Credits3 = "Updated version for Turtle WoW, added Shamans, by Rake/Xerron"
 PallyPower_Credits4 = "Fixes and debugging by Relar"
 PallyPower_Credits5 = "Minor fixes for Turtle WoW patch 1.17.2 by Eiriss"
+PallyPower_Credits6 = "Event Driven 1.8.0 by Xii"
 
 -- Buff name, Class Name
 PallyPower_CouldntFind = "Couldn't find a target for %s on %s!"
@@ -72,11 +72,15 @@ PALLYPOWER_CLEAR = "Clear";
 PALLYPOWER_REFRESH = "Refresh";
 PALLYPOWER_OPTIONS = "Options";
 PALLYPOWER_OPTIONS_TITLE = "Pally Power Options";
-PALLYPOWER_OPTIONS_SCAN = "Scan Frequency (seconds):";
-PALLYPOWER_OPTIONS_SCAN2 = "Poll Per Frame: ";
+PALLYPOWER_OPTIONS_SCAN = "UI Refresh Rate (seconds):";
 PALLYPOWER_OPTIONS_FEEDBACK_CHAT = "Show feedback in chat";
-PALLYPOWER_OPTIONS_SMARTBUFFS = "Smart Buffs";
-PALLYPOWER_OPTIONS_FIVEMIN = "Enable 5 Min Blessing Only - NO GREATER BLESSINGS";
+PALLYPOWER_OPTIONS_SMARTBUFFS = "Smart Buffs (hide Wisdom for melee, Might for casters)";
+local _ttRealms = { Nordanaar=true, ["Tel'Abim"]=true, Ambershire=true }
+PALLYPOWER_OPTIONS_FIVEMIN = _ttRealms[GetRealmName()]
+    and "Enable 10 Min Blessing Only - NO GREATER BLESSINGS"
+    or  "Enable 5 Min Blessing Only - NO GREATER BLESSINGS";
+PALLYPOWER_OPTIONS_OPACITY = "Frame Opacity:";
+PALLYPOWER_OPTIONS_QUIETMODE = "Quiet mode (suppress system messages)";
 if (GetLocale() == "deDE") then
 	-- by Nextorus @ EU-Alexstrasza (nexter@walsweer.de)
     PallyPower_BlessingID[0] = "Weisheit";
@@ -136,6 +140,8 @@ if (GetLocale() == "deDE") then
     -- XML Localization
     PALLYPOWER_CLEAR = "L\195\182schen";
     PALLYPOWER_REFRESH = "Neu abfragen";
+    PALLYPOWER_OPTIONS_OPACITY = "Rahmen-Deckkraft:";
+    PALLYPOWER_OPTIONS_QUIETMODE = "Stiller Modus (Systemnachrichten unterdr\195\188cken)";
 elseif (GetLocale() == "frFR") then
 
 -- by Gagou @ EU-Drek'Thar (thomas@ranchon.org)
@@ -196,5 +202,7 @@ elseif (GetLocale() == "frFR") then
     --XML
     PALLYPOWER_CLEAR = "Nettoyer";
     PALLYPOWER_REFRESH = "Rafraichir";
+    PALLYPOWER_OPTIONS_OPACITY = "Opacit\195\169 du cadre :";
+    PALLYPOWER_OPTIONS_QUIETMODE = "Mode silencieux (masquer les messages syst\195\168me)";
 
 end

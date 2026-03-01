@@ -1149,7 +1149,7 @@
     <Frame name="PallyPower_OptionsFrame" hidden="true" toplevel="true" frameStrata="LOW" enableMouse="true"
            movable="true" parent="UIParent">
         <Size>
-            <AbsDimension x="300" y="300"/>
+            <AbsDimension x="400" y="370"/>
         </Size>
         <Anchors>
             <Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER">
@@ -1195,7 +1195,7 @@
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="$parentOption2" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_SCAN2"
+                <FontString name="$parentOption3" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_FEEDBACK_CHAT"
                             justifyH="LEFT">
                     <Size>
                         <AbsDimension x="200" y="16"/>
@@ -1208,10 +1208,10 @@
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="$parentOption3" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_FEEDBACK_CHAT"
+                <FontString name="$parentOption4" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_SMARTBUFFS"
                             justifyH="LEFT">
                     <Size>
-                        <AbsDimension x="200" y="16"/>
+                        <AbsDimension x="380" y="16"/>
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
@@ -1221,10 +1221,10 @@
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="$parentOption4" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_SMARTBUFFS"
+                <FontString name="$parentOption5" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_FIVEMIN"
                             justifyH="LEFT">
                     <Size>
-                        <AbsDimension x="200" y="16"/>
+                        <AbsDimension x="380" y="16"/>
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
@@ -1234,15 +1234,40 @@
                         </Anchor>
                     </Anchors>
                 </FontString>
-                <FontString name="$parentOption5" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_FIVEMIN"
+                <FontString name="$parentOption6" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_OPACITY"
                             justifyH="LEFT">
                     <Size>
-                        <AbsDimension x="300" y="16"/>
+                        <AbsDimension x="200" y="16"/>
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
                             <Offset>
                                 <AbsDimension x="7" y="-125"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parentOpacityValue" inherits="GameFontHighlight" justifyH="RIGHT">
+                    <Size>
+                        <AbsDimension x="40" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPRIGHT">
+                            <Offset>
+                                <AbsDimension x="-5" y="-125"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString name="$parentOption7" inherits="GameFontHighlight" text="PALLYPOWER_OPTIONS_QUIETMODE"
+                            justifyH="LEFT">
+                    <Size>
+                        <AbsDimension x="380" y="16"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset>
+                                <AbsDimension x="7" y="-155"/>
                             </Offset>
                         </Anchor>
                     </Anchors>
@@ -1309,94 +1334,35 @@
                             this:SetText(PP_PerUser.scanfreq);
                     </OnShow>
                     <OnTabPressed>
-                        PallyPower_OptionsFrameScan2:SetFocus();
+                        this:ClearFocus();
                     </OnTabPressed>
                     <OnEditFocusLost>
                         this:HighlightText(0, 0);
+                        local val = this:GetNumber();
+                        if val &lt; 1 then val = 1 end
+                        if val &gt; 10 then val = 10 end
+                        this:SetText(val);
+                        PallyPower_SetOption("scanfreq", val);
                     </OnEditFocusLost>
                     <OnChar>
 
                     </OnChar>
                     <OnEnterPressed>
-                        PallyPower_OptionsFrameScan2:SetFocus();
+                        local val = this:GetNumber();
+                        if val &lt; 1 then val = 1 end
+                        if val &gt; 10 then val = 10 end
+                        this:SetText(val);
+                        PallyPower_SetOption("scanfreq", val);
+                        this:ClearFocus();
                     </OnEnterPressed>
                     <OnEscapePressed>
                         this:GetParent():Hide();
                     </OnEscapePressed>
                     <OnTextChanged>
-                        if (this:GetNumber() > 0) then
-                        PallyPower_SetOption("scanfreq", this:GetNumber());
-                        end
-                    </OnTextChanged>
-                </Scripts>
-            </EditBox>
-            <EditBox name="$parentScan2" enableMouse="true" letters="8" numeric="true">
-                <Size>
-                    <AbsDimension x="50" y="20"/>
-                </Size>
-                <Anchors>
-                    <Anchor point="TOPRIGHT">
-                        <Offset>
-                            <AbsDimension x="-5" y="-50"/>
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-                <Layers>
-                    <Layer level="BACKGROUND">
-                        <Texture name="$parentLeft" file="Interface\Common\Common-Input-Border">
-                            <Size>
-                                <AbsDimension x="8" y="20"/>
-                            </Size>
-                            <Anchors>
-                                <Anchor point="LEFT"/>
-                            </Anchors>
-                            <TexCoords left="0" right="0.0625" top="0" bottom="0.625"/>
-                        </Texture>
-                        <Texture name="$parentRight" file="Interface\Common\Common-Input-Border">
-                            <Size>
-                                <AbsDimension x="8" y="20"/>
-                            </Size>
-                            <Anchors>
-                                <Anchor point="RIGHT"/>
-                            </Anchors>
-                            <TexCoords left="0.9375" right="1" top="0" bottom="0.625"/>
-                        </Texture>
-                        <Texture name="$parentMiddle" file="Interface\Common\Common-Input-Border">
-                            <Size>
-                                <AbsDimension x="10" y="20"/>
-                            </Size>
-                            <Anchors>
-                                <Anchor point="LEFT" relativeTo="$parentLeft" relativePoint="RIGHT"/>
-                                <Anchor point="RIGHT" relativeTo="$parentRight" relativePoint="LEFT"/>
-                            </Anchors>
-                            <TexCoords left="0.0625" right="0.9375" top="0" bottom="0.625"/>
-                        </Texture>
-                    </Layer>
-                </Layers>
-                <FontString inherits="ChatFontNormal"/>
-                <Scripts>
-                    <OnShow>
-                            this:SetNumeric(1);
-                            this:SetText(PP_PerUser.scanperframe);
-                    </OnShow>
-                    <OnTabPressed>
-                        PallyPower_OptionsFrameScan1:SetFocus();
-                    </OnTabPressed>
-                    <OnEditFocusLost>
-                        this:HighlightText(0, 0);
-                    </OnEditFocusLost>
-                    <OnChar>
-
-                    </OnChar>
-                    <OnEnterPressed>
-                        PallyPower_OptionsFrameScan1:SetFocus();
-                    </OnEnterPressed>
-                    <OnEscapePressed>
-                        this:GetParent():Hide();
-                    </OnEscapePressed>
-                    <OnTextChanged>
-                        if (this:GetNumber() > 0) then
-                        PallyPower_SetOption("scanperframe", this:GetNumber());
+                        local val = this:GetNumber();
+                        if val &gt; 0 then
+                            if val &gt; 10 then val = 10 end
+                            PallyPower_SetOption("scanfreq", val);
                         end
                     </OnTextChanged>
                 </Scripts>
@@ -1408,7 +1374,7 @@
                 <Anchors>
                     <Anchor point="TOPRIGHT">
                         <Offset>
-                            <AbsDimension x="-5" y="-75"/>
+                            <AbsDimension x="-5" y="-50"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -1424,7 +1390,7 @@
                 <Anchors>
                     <Anchor point="TOPRIGHT">
                         <Offset>
-                            <AbsDimension x="-5" y="-100"/>
+                            <AbsDimension x="-5" y="-75"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -1440,7 +1406,7 @@
                 <Anchors>
                     <Anchor point="TOPRIGHT">
                         <Offset>
-                            <AbsDimension x="-5" y="-125"/>
+                            <AbsDimension x="-5" y="-100"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -1449,10 +1415,69 @@
                     <OnClick>FiveMinuteBlessingOn = this:GetChecked();PallyPower_FiveMinuteBlessings();</OnClick>
                 </Scripts>
             </CheckButton>
+            <Slider name="$parentOpacitySlider" orientation="HORIZONTAL" minValue="0" maxValue="100" defaultValue="50"
+                    valueStep="5" enableMouse="true">
+                <Size>
+                    <AbsDimension x="180" y="16"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-45" y="-125"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Backdrop bgFile="Interface\Buttons\UI-SliderBar-Background" edgeFile="Interface\Buttons\UI-SliderBar-Border"
+                          tile="true">
+                    <EdgeSize>
+                        <AbsValue val="8"/>
+                    </EdgeSize>
+                    <TileSize>
+                        <AbsValue val="8"/>
+                    </TileSize>
+                    <BackgroundInsets>
+                        <AbsInset left="3" right="3" top="6" bottom="6"/>
+                    </BackgroundInsets>
+                </Backdrop>
+                <ThumbTexture name="$parentThumbTexture" file="Interface\Buttons\UI-SliderBar-Button-Horizontal">
+                    <Size>
+                        <AbsDimension x="32" y="32"/>
+                    </Size>
+                </ThumbTexture>
+                <Scripts>
+                    <OnShow>
+                        local pct = math.floor((PP_PerUser.opacity or 0.5) * 100);
+                        this:SetValue(pct);
+                        getglobal(this:GetParent():GetName().."OpacityValue"):SetText(pct.."%");
+                    </OnShow>
+                    <OnValueChanged>
+                        local pct = math.floor(this:GetValue());
+                        PP_PerUser.opacity = pct / 100;
+                        getglobal(this:GetParent():GetName().."OpacityValue"):SetText(pct.."%");
+                        PallyPower_ApplyOpacity();
+                    </OnValueChanged>
+                </Scripts>
+            </Slider>
+            <CheckButton name="$parentQuietMode" inherits="OptionsCheckButtonTemplate">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-5" y="-155"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnShow>if (PP_PerUser.quietmode) then this:SetChecked(true) else this:SetChecked(false) end</OnShow>
+                    <OnClick>PP_PerUser.quietmode = this:GetChecked()</OnClick>
+                </Scripts>
+            </CheckButton>
         </Frames>
         <Scripts>
             <OnLoad>
-                    this:SetBackdropColor(0.0, 0.0, 0.0, 0.5);
+                    this:SetBackdropColor(0.0, 0.0, 0.0, PP_PerUser.opacity);
             </OnLoad>
         </Scripts>
     </Frame>

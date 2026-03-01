@@ -38,7 +38,7 @@ Note: The TOC also lists `PallyPower.lua` before `PallyPower.xml`, so PallyPower
 - **Public API functions:** `PallyPower_PascalCase` prefix (e.g., `PallyPower_OnLoad`, `PallyPower_ScanSpells`, `PallyPower_UpdateUI`)
 - **Local helpers:** `PascalCase` without prefix (e.g., `RebuildRoster`, `ScanOneUnit`, `PruneCurrentBuffs`)
 - **Debug helper:** `PP_Debug(str)` — prints to chat when `PP_DebugEnabled` is set
-- **Constants:** `ALL_CAPS` (e.g., `DEBOUNCE_INTERVAL`, `PP_PREFIX`, `BINDING_HEADER_PALLYPOWER_HEADER`)
+- **Constants:** `ALL_CAPS` (e.g., `PP_PREFIX`, `BINDING_HEADER_PALLYPOWER_HEADER`)
 - **State tables:** `PascalCase` (e.g., `RosterUnits`, `UnitClassID`, `CurrentBuffs`, `AllPallys`, `RosterSet`)
 - **Blessing IDs:** Numeric 0–5 (Wisdom, Might, Salvation, Light, Kings, Sanctuary); -1 = unassigned
 - **Class IDs:** Numeric 0–9 (Warrior, Rogue, Priest, Druid, Paladin, Hunter, Mage, Warlock, Shaman, Pet)
@@ -46,7 +46,7 @@ Note: The TOC also lists `PallyPower.lua` before `PallyPower.xml`, so PallyPower
 ### Architecture: Event-Driven Updates
 Events trigger incremental scans instead of periodic polling:
 - `UNIT_AURA` → `ScanOneUnit(unit)` → sets `uiDirty = true`
-- `OnUpdate` debounces at 0.2s (`DEBOUNCE_INTERVAL`), then calls `PallyPower_UpdateUI()`
+- `OnUpdate` debounces using `PP_PerUser.scanfreq` (default 1s), then calls `PallyPower_UpdateUI()`
 - Roster rebuilt on `RAID_ROSTER_UPDATE` / `PARTY_MEMBERS_CHANGED` / `UNIT_PET`
 - `BAG_UPDATE` → `PallyPower_ScanInventory()` (Symbol of Kings count)
 - `SPELLS_CHANGED` / `PLAYER_ENTERING_WORLD` → `PallyPower_ScanSpells()` (re-scan spellbook)

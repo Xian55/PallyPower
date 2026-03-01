@@ -1,7 +1,8 @@
 ## Interface: 11200
 ## Title: |cFFFF8080Relar|r PallyPower |cff7fff7f1.072|r |cffabd473Turtle-WoW|r
-## Author: Relar
+## Author: Xii
 ## DefaultState: Enabled
+## Version: 1.8.0
 ## LoadOnDemand: 0
 ## SavedVariablesPerCharacter: PallyPower_Assignments, FiveMinuteBlessingOn, PP_PerUser
 PallyPower.lua
